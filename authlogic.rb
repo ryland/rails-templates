@@ -72,6 +72,17 @@ route "map.root :controller => 'user_sessions', :action => 'new'"
 # User Migration
 generate "rspec_model", "user", "login:string", "email:string", "crypted_password:string", "password_salt:string", "persistence_token:string", "single_access_token:string", "perishable_token:string", "last_login_at:datetime", "last_login_ip:string"
 
+# User Spec
+file "spec/models/user_spec.rb", <<-FILE
+
+require 'spec_helper'
+describe User do
+  it "should create a new instance given valid attributes" do
+    User.create!(Factory.attributes_for(:user))
+  end
+end
+FILE
+
 # UsesSessionsController
 file "app/controllers/user_sessions_controller.rb", <<-FILE
 class UserSessionsController < ApplicationController  
